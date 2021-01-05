@@ -29,8 +29,9 @@ manage.py        #Has all classes etc
     urls.py           #define url patterns
     views.py          #handle rsponses here
 ```
+
     - add `'<app-name>.apps.<App-name>Config'` to `INSTALLED_APPS` in `<site-name>/settings.py`
-    - migrate with `python manage.py migrate` to update changes
+    - when models.py is changed, run `python manaeg.py makemigrations` and then `python manage.py migrate` to update changes
     - debug with `python manage.py shell`
 3. add templates folder for `.html` files
     - in `<app-name>/views.py`, link to html files with `render(request, <app-name>/<template-name>.html, argDict)`
