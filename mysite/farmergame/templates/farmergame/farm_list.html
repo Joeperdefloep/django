@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farm list view</title>
+</head>
+<body>
+    <h1>Farms</h1>
+    <ul>
+        {% for farm in object_list %}
+            <li><a href="{% url 'farmergame:view_farm' farm.id %}"> {{ farm.farm_name }} - {{ farm.capital }}</a></li>
+        {% empty %}
+            <li>No farms yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html> 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trade animals for {{ farm.farm_name }}</title>
+    <script type="text/javascript">
+        var capital = {{ farm.capital }}
+        function buySellAnimal(buy_price, sell_price, nr_owned, new_value) {
+            var change = nr_owned-new_value
+            document.getElementById('total').innerHTML = new_value
+            if(nr_owned-new_value < 0) {
+                document.getElementById('total').innerHTML = capital + buy_price*change
+            } else {
+               document.getElementById('total').innerHTML = capital + sell_price*change
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>{{ farm.farm_name }}</h1>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {{ form.as_table }}
+            {% endfor %}
+            
+        </form>
+    </div>
+    <!--
+    <form action="{% url 'farmergame:buy_animals' farm.id %}" method="post" >
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Species</th>
+                <th>Owned</th>
+                <th>Buy price</th>
+                <th>Amount</th>
+                <th>Sell price</th>
+                <th>Difference</th>
+            </tr>
+        {% for ownanimal in farm.ownanimal_set.all %}
+            <tr>
+                <td>{{ ownanimal.animal.species }}</td>
+                <td>{{ ownanimal.nr_owned}}</td>
+                <td>{{ ownanimal.animal.buy_price }}</td>
+                <td><input name="desired_amount" type="number" step="1" pattern="\d+" value={{ ownanimal.nr_owned }}, onchange="buySellAnimal({{ ownanimal.animal.buy_price }},{{ ownanimal.animal.sell_price }},{{ ownanimal.nr_owned }},value)"/></td>
+                <td>{{ ownanimal.animal.sell_price }}</td>
+                <td id={{ ownanimal.pk }}></td>
+            <tr>
+            <input type="hidden" name="OwnAnimalPk" value={{ownanimal.pk}}>
+        {% empty %}
+            <h1>No animals available to buy</h1>
+        {% endfor %}
+            <tr>
+                <td></td>
+                <td>Total:</td>
+                <td id="total">{{ farm.capital }}</td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+    -->
+</body>
+</html> 
