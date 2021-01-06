@@ -1,11 +1,7 @@
-var animals = [
-    {% for ownanimal in farm.ownanimal_set.all %}
-        {
-            species: "{{ ownanimal.animal.species }}",
-            breed:  "{{ ownanimal.animal.breed }}",
-            nr_owned: "{{ ownanimal.nr_owned }}"
-            buy_price: "{{ownanimal.animal.buy_price }}"
-            sell_price: "{{ownanimal.animal.sell_price"
-        }
-    {% endfor %}
-]
+var data = JSON.parse("{{data|escapejs}}")
+var dataNode = document.getElementById('alldata')
+dataNode.innerHTML = "{{data|escapejs}}"
+dataNode = document.getElementById('neatdata')
+for (var x in data){
+    dataNode.innerHTML+=x+' : '+data[x]+'<br>';
+}
