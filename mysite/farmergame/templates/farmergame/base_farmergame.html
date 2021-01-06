@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}The Farmer game{% endblock %}</title>
+</head>
+<body>
+    <h1>Default stuff here</h1>
+    {% block content %}
+        <h1>Welcome to the farmer game!</h1>
+        <p>more stuff will be implemented</p>
+        <a href="{% url 'farmergame:index' %}">Go to the farm index</a>
+    {% endblock content %}
+</body>
+</html> 

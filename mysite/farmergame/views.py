@@ -13,7 +13,12 @@ class FarmListView(generic.ListView):
     """The view for the index of farms"""
     model = Farm
     template_name='farmergame/farm_list.html'
-    
+
+def root(request):
+    """the root page"""
+    return render(request, 'farmergame/base_farmergame.html')
+
+
 def trade_animals(request, pk):
     """handles the buy animals form page"""
     farm = get_object_or_404(Farm, pk=pk)
@@ -63,6 +68,6 @@ def trade_animals(request, pk):
 def view_farm(request, pk):
     """view the farm"""
     farm = get_object_or_404(Farm, pk=pk)
-    dataJSON = dumps(farm.ownanimal_set.all(), cls=DjangoJSONEncoder)
-    return render(request, 'farmergame/view_farm.html', {'farm':farm,
-                                                         'data': dataJSOM})
+    return render(request, 'farmergame/view_farm.html', {
+        'farm':farm
+    })

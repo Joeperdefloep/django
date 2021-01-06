@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Farm view: {{ farm.name }}</title>
+    {% load static %}
+
 </head>
 <body>
     <h1>{{ farm.name }}</h1>
@@ -16,5 +18,7 @@
         {% endfor %}
     </ul>
     
+    <h2 id='all_data'> hello {{ farm.ownanimal_set.all }} </h2>
+    <script src="{% static 'farmergame/javascript/farm_view.js' %}"></script>
 </body>
 </html> 
