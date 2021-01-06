@@ -14,10 +14,10 @@ class Animal(models.Model):
         return self.species + ": " + self.breed
 
 
-class AnnuaLCrop(models.Model):
+class AnnualCrop(models.Model):
     type = models.CharField(max_length = 100)
     specifics = models.CharField(max_length = 255)
-    buy_price = models.IntegerField(default=0)
+    seed_price = models.IntegerField(default=0)
     sell_price = models.IntegerField(default=0)
 
 class Person(models.Model):

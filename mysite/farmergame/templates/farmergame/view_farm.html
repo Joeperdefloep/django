@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Farm view: {{ farm.name }}</title>
-    {% load static %}
-
-</head>
-<body>
+{% extends "farmergame/base_farmergame.html" %}
+{% block title %}Farm view: {{ farm.name }}{% endblock %}
+{% load static %}
+{% block content %}
     <h1>{{ farm.name }}</h1>
-    Money: {{ farm.capital }}
+    Money: {{ farm.capital }}<br>
+    <a href="{% url 'farmergame:trade_animals' farm.pk %}">Trade animals!</a>
     
     <ul>
         {% for ownanimal in farm.ownanimal_set.all %}
@@ -19,6 +15,14 @@
     </ul>
     
     <h2 id='all_data'> hello {{ farm.ownanimal_set.all }} </h2>
-    <script src="{% static 'farmergame/javascript/farm_view.js' %}"></script>
-</body>
-</html> 
+    <script type="text/javascript" src="farm_view.js"> 
+        /*var tag = document.createElement("p"); 
+        var text = document.createTextNode( 
+                "Inline JavaScript is applied!"); 
+  
+        tag.appendChild(text); 
+        var element = document.getElementById("all_data");
+        element.innerText = "MEauw!" 
+        element.appendChild(tag);   */
+    </script> 
+{% endblock content %}
