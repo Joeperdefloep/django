@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farm view: {{ farm.name }}</title>
+</head>
+<body>
+    <h1>{{ farm.name }}</h1>
+    Money: {{ farm.capital }}
+    
+    <ul>
+        {% for ownanimal in farm.ownanimal_set.all %}
+            <li>{{ownanimal.nr_owned}} {{ ownanimal.animal.species }}s of breed {{ ownanimal.animal.breed }}</li>
+        {% empty %}
+            <li>No animals available.</li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html> 

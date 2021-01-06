@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Trade animals for {{ farm.farm_name }}</title>
+    <title>Trade animals for {{ farm.name }}</title>
     <script type="text/javascript">
         var capital = {{ farm.capital }}
         function buySellAnimal(buy_price, sell_price, nr_owned, new_value) {
@@ -17,15 +17,24 @@
     </script>
 </head>
 <body>
-    <h1>{{ farm.farm_name }}</h1>
+    <h1>Trade animals for {{ farm.name }}</h1>
+    {% if error_message %}
+        <strong>{{ error_message }}</strong>
+    {% endif %}
     <div>
         <form method="POST">
             {% csrf_token %}
-            {{ formset.management_form }}
-            {% for form in formset %}
-                {{ form.as_table }}
+            <table>
+            {% for field in form %}
+            <tr>
+                <td>{{ field.label }}</td>
+                <td>{{ field }}</td>
+                <td>meeer peop!</td>
+            <tr>
             {% endfor %}
             
+            </table>
+            <input type="submit" value="Confirm"/>
         </form>
     </div>
     <!--
