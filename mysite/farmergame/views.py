@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.forms import modelformset_factory
-
+from django.core.serializers.json import DjangoJSONEncoder
+from json import dumps
 
 from .models import Animal, Farm, OwnAnimal
 from .forms import TradeAnimalsForm
@@ -62,4 +63,6 @@ def trade_animals(request, pk):
 def view_farm(request, pk):
     """view the farm"""
     farm = get_object_or_404(Farm, pk=pk)
-    return render(request, 'farmergame/view_farm.html', {'farm':farm})
+    dataJSON = dumps(farm.ownanimal_set.all(), cls=DjangoJSONEncoder)
+    return render(request, 'farmergame/view_farm.html', {'farm':farm,
+                                                         'data': dataJSOM})
