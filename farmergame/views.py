@@ -34,7 +34,7 @@ def trade_animals(request, pk):
         if form.is_valid():
             farm = Farm.objects.get(pk=pk)
             owned_animals = farm.ownanimal_set.all()
-            money = farm.capital
+            money = farm.money
             
             for owned_animal in owned_animals:
                 nr_change = form.cleaned_data[str(owned_animal.pk)] - owned_animal.nr_owned
@@ -65,6 +65,16 @@ def trade_animals(request, pk):
         form = TradeAnimalsForm(pk)
         return render(request, 'farmergame/buy_animals.html', {'farm': farm, 'form': form})
         
+def button_trade(request, pk):
+    print("Button trade working!")
+    #button = request.GET.get('button', None)
+    #print(button)
+    response = render(request, 'farmergame/buy_animals.html', {
+        'farm': get_object_or_404(Farm, pk=1),
+        'form': TradeAnimalsForm(1)
+    })
+    return response
+
 def view_farm(request, pk):
     """view the farm"""
     farm = get_object_or_404(Farm, pk=pk)

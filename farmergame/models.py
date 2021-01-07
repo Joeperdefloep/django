@@ -32,7 +32,7 @@ class Farm(models.Model):
     fields = np.zeros([3,3],dtype=int)
     
     name = models.CharField(max_length=200)
-    capital = models.IntegerField(default=4000)
+    money = models.IntegerField(default=4000)
     animals = models.ManyToManyField(Animal, through='OwnAnimal')
       
     def __str__(self):

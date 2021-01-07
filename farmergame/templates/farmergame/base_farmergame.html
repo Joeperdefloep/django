@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" , type="text/css" href="{% static 'farmergame/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'farmergame/images/favicon.png' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        /*$("a").click(function(){
+            alert("you clicked " + $(this).text())
+        });*/
+        
+        $("#buy").click(function(){
+            alert("you clikckdaen buy button")
+            let AJdata = { 'button': $(this).text() }
+            $.ajax({
+                data: AJdata,
+                url: "{% url 'farmergame:button_trade' 1 %}",
+                //on success
+                success: function(response) {
+                    $("#content").html(response)
+                },
+    
+                error: function(response) {
+                    console.log(response.errors)
+                }
+            });
+        });
+        
+    });
+    </script>
+    <title>{% block title %}The Farmer game{% endblock %}</title>
+</head>
+
+<body>
+    <!-- The sidebar -->
+    <div class="sidebar">
+        {% block sidebar %}
+        <a class="active" href="#home">Overview</a>
+        <a id="buy" href="#buy">buy animals</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        more sidebar stuff!
+        {% endblock sidebar %}
+    </div>
+
+    <!-- Page content -->
+    <div class="content">
+        {% block header %}
+        <h1 id='demo'>Default stuff here</h1>
+        {% endblock %}
+        <div id="content"></div>
+        {% block content %}
+        <h1>Welcome to the farmer game!</h1>
+        <p>more stuff will be implemented</p>
+        <a href="{% url 'farmergame:index' %}">Go to the farm index</a>
+        {% endblock content %}
+        </div>
+    </div>
+</body>
+
+</html>
